@@ -29,7 +29,7 @@ class GameScene extends Phaser.Scene {
       fontFamily: "Arial",
       fontSize: "20px",
       fill: "#ffffff",
-    }).setOrigin(0, 1);
+    }).setOrigin(0, 1).setScale(width / 1200);
 
     const start = this.add.sprite(width / 2, height * 3 / 4, 'tap_to_start').setScale(width / 1000).setOrigin(0.5);
 
