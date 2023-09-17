@@ -25,12 +25,14 @@ class TutorialScene extends Phaser.Scene {
 
     const gameScene = this.scene.get('GameScene');
 
-    var score = 0;
-    const scoreText = this.add.text(16, 16, `Score: ${score}`, {
+    this.score = 0;
+    const scoreText = this.add.text(16, 16, `Score: ${this.score}`, {
       fontFamily: 'Arial',
       fontSize: '32px',
       fill: '#ffffff',
     });
+
+    this.scene.start('GameOverScene', {score: this.score, success: true, level_number: 1}); // HERE
 
     this.mistakeCount = 0;
     this.livesLeftText = this.add.text(width - 16, 16, `Lives Left: ${this.MISTAKE_LIMIT - this.mistakeCount}`, {
@@ -64,9 +66,9 @@ class TutorialScene extends Phaser.Scene {
         const timeDelta = Math.abs(currentTime - timestamp);
         if (timeDelta <= this.TOLERANCE) { // must be within 100 ms of the beat
           tappedCorrect = true;
-          score += 10;
+          this.score += 10;
           this.checkedTimestamps[timestamp] = true;
-          scoreText.setText(`Score: ${score}`);
+          scoreText.setText(`Score: ${this.score}`);
           navigator.vibrate(200);
           break;
         }
@@ -82,11 +84,14 @@ class TutorialScene extends Phaser.Scene {
         this.livesLeftText.setText(`Lives Left: ${this.MISTAKE_LIMIT - this.mistakeCount}`);
         if (this.mistakeCount >= this.MISTAKE_LIMIT) {
           this.song.stop();
-          this.scene.start('GameOverScene');
+          this.scene.start('GameOverScene', {score: this.score, success: false, level_number: 1});
         }
         this.error.play();
       }
     });
+    this.song.on('complete', () => {
+      this.scene.start('GameOverScene', {score: this.score, success: true, level_number: 1});
+    })
   }
 
   update() {
@@ -99,7 +104,7 @@ class TutorialScene extends Phaser.Scene {
         this.livesLeftText.setText(`Lives Left: ${this.MISTAKE_LIMIT - this.mistakeCount}`);
         if (this.mistakeCount >= this.MISTAKE_LIMIT) {
           this.song.stop();
-          this.scene.start('GameOverScene');
+          this.scene.start('GameOverScene', {score: this.score, success: false, level_number: 1});
         }
         // this.error.play();
       }
