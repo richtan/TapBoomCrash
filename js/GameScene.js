@@ -25,6 +25,12 @@ class GameScene extends Phaser.Scene {
     const logo_drum = this.add.sprite(width / 2, height * 5 / 11, 'logo_drum').setScale(width / 2500).setOrigin(0.5);
     const cymbal = this.add.sprite(width * 3 / 4, height * 5 / 11, 'logo_cymbal').setScale(width / 2500).setOrigin(0.5);
 
+    const made_by_text = this.add.text(16, height - 16, "Made by Richie Tan (game code), Hermes Fu (menu code), Nikhil Prasad (music+voiceovers), and Alex Carroll (music+bass)", {
+      fontFamily: "Arial",
+      fontSize: "20px",
+      fill: "#ffffff",
+    }).setOrigin(0, 1);
+
     const start = this.add.sprite(width / 2, height * 3 / 4, 'tap_to_start').setScale(width / 1000).setOrigin(0.5);
 
     this.input.on('pointerdown', () => {
