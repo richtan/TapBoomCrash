@@ -22,7 +22,7 @@ class GameScene extends Phaser.Scene {
     const crash = this.add.sprite(780, 200, 'logo_crash').setScale(1.25).setOrigin(0.5);
 
     const stick = this.add.sprite(180, 350, 'logo_stick').setScale(0.5).setOrigin(0.5);
-    const drum = this.add.sprite(480, 350, 'logo_drum').setScale(0.65).setOrigin(0.5);
+    const logo_drum = this.add.sprite(480, 350, 'logo_drum').setScale(0.65).setOrigin(0.5);
     const cymbal = this.add.sprite(780, 350, 'logo_cymbal').setScale(0.55).setOrigin(0.5);
 
     const start = this.add.sprite(width / 2, 600, 'tap_to_start').setScale(1).setOrigin(0.5);
