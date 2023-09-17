@@ -6,9 +6,9 @@ class LevelSelectScene extends Phaser.Scene {
   preload() {
     this.load.image('arrow', 'assets/arrow.png');
     this.load.image('select', 'assets/select_neon.png');
-    this.load.image('song1', 'assets/song1.png');
-    this.load.image('song2', 'assets/song2.png');
-    this.load.image('song3', 'assets/song3.png');
+    this.load.image('song1', 'assets/song1.jpg');
+    this.load.image('song2', 'assets/song2.jpg');
+    this.load.image('song3', 'assets/song3.jpg');
   }
 
   create() {
@@ -21,10 +21,10 @@ class LevelSelectScene extends Phaser.Scene {
     const left = this.add.image(60, height / 2, 'arrow').setScale(0.1).setAngle(180).setInteractive();
 
     //Select
-    const select = this.add.image(width / 2, height * 3 / 4, 'select').setScale(1).setOrigin(0.5).setInteractive();
+    const select = this.add.image(width / 2, 600, 'select').setScale(1).setOrigin(0.5).setInteractive();
 
     //Song Detail
-    const song = this.add.image(width / 2, height / 2 - 50, 'song1').setScale(0.5).setInteractive();
+    const song = this.add.image(width / 2, height / 2 - 50, 'song1').setScale(2).setInteractive();
     var song_nm = 1; //current song number
 
     song.on('pointerdown', () => {

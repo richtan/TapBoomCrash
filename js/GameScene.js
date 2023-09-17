@@ -25,7 +25,7 @@ class GameScene extends Phaser.Scene {
     const logo_drum = this.add.sprite(width / 2, 350, 'logo_drum').setScale(0.65).setOrigin(0.5);
     const cymbal = this.add.sprite(width * 3 / 4, 350, 'logo_cymbal').setScale(0.55).setOrigin(0.5);
 
-    const start = this.add.sprite(width / 2, 600, 'tap_to_start').setScale(1.25).setOrigin(0.5);
+    const start = this.add.sprite(width / 2, 600, 'tap_to_start').setScale(1).setOrigin(0.5);
 
     this.input.on('pointerdown', () => {
       this.scene.start('LevelSelectScene'); // Go to level select when tapped
