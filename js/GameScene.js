@@ -7,21 +7,25 @@ class GameScene extends Phaser.Scene {
     this.load.image('logo_tap', 'assets/logo/tap_neon.png');
     this.load.image('logo_boom', 'assets/logo/boom_neon.png');
     this.load.image('logo_crash', 'assets/logo/crash_neon.png');
+    this.load.image('tap_to_start', 'assets/tap_to_start.png');
+    this.load.image('logo_drum', 'assets/logo/drum_logo.jpg');
+    this.load.image('logo_stick', 'assets/logo/stick_logo.jpg');
+    this.load.image('logo_cymbal', 'assets/logo/cymbal_logo2.png');
   }
 
   create() {
     const width = this.scale.gameSize.width;
     const height = this.scale.gameSize.height;
 
-    const tap = this.add.sprite(150, 200, 'logo_tap').setScale(1.25);
-    const boom = this.add.sprite(400, 200, 'logo_boom').setScale(1.25);
-    const crash = this.add.sprite(700, 200, 'logo_crash').setScale(1.25);
+    const tap = this.add.sprite(180, 200, 'logo_tap').setScale(1.25).setOrigin(0.5);
+    const boom = this.add.sprite(480, 200, 'logo_boom').setScale(1.25).setOrigin(0.5);
+    const crash = this.add.sprite(780, 200, 'logo_crash').setScale(1.25).setOrigin(0.5);
 
-    const tap_to_start = this.add.text(width / 2, 480, 'Tap To Start', {
-      fontFamily: 'Arial',
-      fontSize: '150px',
-      fill: '#ffffff',
-    }).setOrigin(0.5);
+    const stick = this.add.sprite(180, 350, 'logo_stick').setScale(0.5).setOrigin(0.5);
+    const logo_drum = this.add.sprite(480, 350, 'logo_drum').setScale(0.65).setOrigin(0.5);
+    const cymbal = this.add.sprite(780, 350, 'logo_cymbal').setScale(0.55).setOrigin(0.5);
+
+    const start = this.add.sprite(width / 2, 600, 'tap_to_start').setScale(1).setOrigin(0.5);
 
     this.input.on('pointerdown', () => {
       this.scene.start('LevelSelectScene'); // Go to level select when tapped

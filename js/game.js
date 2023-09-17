@@ -1,8 +1,3 @@
-// import PlayLevelScene from "./PlayLevelScene";
-// import LevelSelectScene from "./LevelSelectScene";
-// import TutorialScene from "./TutorialScene";
-// import GameScene from "./GameScene";
-
 const config = {
   type: Phaser.AUTO,
   parent: 'game-canvas',
