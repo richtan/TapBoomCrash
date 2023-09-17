@@ -94,18 +94,17 @@ class TutorialScene extends Phaser.Scene {
         if (timeDelta <= this.TOLERANCE) { // must be within 100 ms of the beat
           tappedCorrect = true;
           this.score += 10;
-
-          var random_value = Math.floor(Math.random() * 4);
-          if(random_value == 0) {
+          var random_value = Math.floor(Math.random() * 20);
+          if (random_value == 0) {
             this.good_job.play();
           }
-          else if(random_value == 1) {
+          else if (random_value == 1) {
             this.nice.play();
           }
-          else if(random_value == 2) {
+          else if (random_value == 2) {
             this.do_more.play();
           }
-          else {
+          else if (random_value == 3) {
             this.damm.play();
           }
 
@@ -126,13 +125,13 @@ class TutorialScene extends Phaser.Scene {
         this.livesLeftText.setText(`Lives Left: ${this.MISTAKE_LIMIT - this.mistakeCount}`);
         if (this.mistakeCount >= this.MISTAKE_LIMIT) {
           this.song.stop();
-          this.scene.start('GameOverScene', {score: this.score, success: false, level_number: 1});
+          this.scene.start('GameOverScene', { score: this.score, success: false, level_number: 1 });
         }
         this.error.play();
       }
     });
     this.song.on('complete', () => {
-      this.scene.start('GameOverScene', {score: this.score, success: true, level_number: 1});
+      this.scene.start('GameOverScene', { score: this.score, success: true, level_number: 1 });
     })
   }
 
@@ -147,7 +146,7 @@ class TutorialScene extends Phaser.Scene {
         this.livesLeftText.setText(`Lives Left: ${this.MISTAKE_LIMIT - this.mistakeCount}`);
         if (this.mistakeCount >= this.MISTAKE_LIMIT) {
           this.song.stop();
-          this.scene.start('GameOverScene', {score: this.score, success: false, level_number: 1});
+          this.scene.start('GameOverScene', { score: this.score, success: false, level_number: 1 });
         }
       }
     }
