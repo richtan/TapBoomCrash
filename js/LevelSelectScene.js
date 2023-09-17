@@ -17,14 +17,14 @@ class LevelSelectScene extends Phaser.Scene {
     const height = this.scale.gameSize.height;
 
     //Arrow
-    const right = this.add.image(width - 60, height / 2, 'arrow').setScale(0.1).setInteractive();
-    const left = this.add.image(60, height / 2, 'arrow').setScale(0.1).setAngle(180).setInteractive();
+    const right = this.add.image(width - 10, height / 2, 'arrow').setOrigin(1, 0.5).setScale(width / 7000).setInteractive();
+    const left = this.add.image(10, height / 2, 'arrow').setOrigin(1, 0.5).setScale(width / 7000).setAngle(180).setInteractive();
 
     //Select
-    const select = this.add.image(width / 2, height * 3 / 4, 'select').setScale(1).setOrigin(0.5).setInteractive();
+    const select = this.add.image(width / 2, height * 4 / 5, 'select').setScale(width * 7 / 8000).setOrigin(0.5).setInteractive();
 
     //Song Detail
-    const song = this.add.image(width / 2, height / 2 - 50, 'song1').setScale(0.5).setInteractive();
+    const song = this.add.image(width / 2, height / 2 - 50, 'song1').setOrigin(0.5).setScale(width * 4 / 8000).setInteractive();
     var song_nm = 1; //current song number
 
     song.on('pointerdown', () => {

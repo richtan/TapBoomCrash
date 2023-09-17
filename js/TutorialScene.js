@@ -14,7 +14,7 @@ class TutorialScene extends Phaser.Scene {
     const width = this.scale.gameSize.width;
     const height = this.scale.gameSize.height;
 
-    const drum = this.add.sprite(width / 2, height / 2, 'drum').setOrigin(0.5).setScale(1.0).setInteractive();
+    const drum = this.add.sprite(width / 2, height / 2, 'drum').setOrigin(0.5).setScale(width * 6 / 8000).setInteractive();
 
     this.TOLERANCE = 0.1;
     this.MISTAKE_LIMIT = 4;
@@ -48,11 +48,11 @@ class TutorialScene extends Phaser.Scene {
       this.add.timeline([
         {
           at: 0,
-          run: () => { drum.setScale(1.1); },
+          run: () => { drum.setScale(width * 7 / 8000); },
         },
         {
           at: 100,
-          run: () => { drum.setScale(1.0); },
+          run: () => { drum.setScale(width * 6 / 8000); },
         },
       ]).play();
 
@@ -79,7 +79,6 @@ class TutorialScene extends Phaser.Scene {
           }
         }
         this.mistakeCount++;
-        console.log("Adding in create() for " + 1)
         this.livesLeftText.setText(`Lives Left: ${this.MISTAKE_LIMIT - this.mistakeCount}`);
         if (this.mistakeCount >= this.MISTAKE_LIMIT) {
           this.song.stop();
@@ -98,7 +97,6 @@ class TutorialScene extends Phaser.Scene {
         this.checkedTimestamps[timestamp] = true;
         console.log(this.checkedTimestamps)
         this.mistakeCount++;
-        console.log("Adding in update() for " + timestamp)
         this.livesLeftText.setText(`Lives Left: ${this.MISTAKE_LIMIT - this.mistakeCount}`);
         if (this.mistakeCount >= this.MISTAKE_LIMIT) {
           this.song.stop();
