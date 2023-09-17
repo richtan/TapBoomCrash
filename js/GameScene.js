@@ -11,11 +11,15 @@ class GameScene extends Phaser.Scene {
     this.load.image('logo_drum', 'assets/logo/drum_logo.jpg');
     this.load.image('logo_stick', 'assets/logo/stick_logo.jpg');
     this.load.image('logo_cymbal', 'assets/logo/cymbal_logo2.png');
+    this.load.audio('tap_to_start', 'assets/voice/tap the screen to play.m4a');
   }
 
   create() {
     const width = this.scale.gameSize.width;
     const height = this.scale.gameSize.height;
+
+    this.tap_to_start = this.sound.add('tap_to_start').setVolume(4);
+    this.tap_to_start.play();
 
     const tap = this.add.sprite(width / 4, height * 2 / 9, 'logo_tap').setScale(width / 1000).setOrigin(0.5);
     const boom = this.add.sprite(width / 2, height * 2 / 9, 'logo_boom').setScale(width / 1000).setOrigin(0.5);
@@ -34,6 +38,7 @@ class GameScene extends Phaser.Scene {
     const start = this.add.sprite(width / 2, height * 3 / 4, 'tap_to_start').setScale(width / 1000).setOrigin(0.5);
 
     this.input.on('pointerdown', () => {
+      this.tap_to_start.stop();
       this.scene.start('LevelSelectScene'); // Go to level select when tapped
     });
   }
