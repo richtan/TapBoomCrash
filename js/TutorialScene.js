@@ -32,7 +32,8 @@ class TutorialScene extends Phaser.Scene {
       fill: '#ffffff',
     });
 
-    this.scene.start('GameOverScene', {score: this.score, success: true, level_number: 1}); // HERE
+    // DEBUGGING only
+    // this.scene.start('GameOverScene', {score: this.score, success: true, level_number: 1}); // HERE
 
     this.mistakeCount = 0;
     this.livesLeftText = this.add.text(width - 16, 16, `Lives Left: ${this.MISTAKE_LIMIT - this.mistakeCount}`, {
