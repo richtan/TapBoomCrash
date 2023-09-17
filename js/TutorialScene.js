@@ -66,7 +66,7 @@ class TutorialScene extends Phaser.Scene {
     this.welcome.play();
     setTimeout(() => {
       this.tap_with_me.play();
-    }, "5000");
+    }, "15660");
     this.welcome.play();
     setTimeout(() => {
       this.let_see.play();
