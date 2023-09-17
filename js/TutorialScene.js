@@ -65,13 +65,21 @@ class TutorialScene extends Phaser.Scene {
         if (timeDelta <= this.TOLERANCE) { // must be within 100 ms of the beat
           tappedCorrect = true;
           score += 10;
+          this.checkedTimestamps[timestamp] = true;
           scoreText.setText(`Score: ${score}`);
           navigator.vibrate(200);
           break;
         }
       }
-      if (!tappedCorrect) { // Deal with when user taps too early or too late
+      if (!tappedCorrect) { // Deal with when user taps too early
+        for (var i = 0; i < beats['tutorial'].length; i++) {
+          const timestamp = beats['tutorial'][i];
+          if (!this.checkedTimestamps[timestamp] && currentTime > timestamp - this.TOLERANCE) {
+            this.checkedTimestamps[timestamp] = true;
+          }
+        }
         this.mistakeCount++;
+        console.log("Adding in create() for " + 1)
         this.livesLeftText.setText(`Lives Left: ${this.MISTAKE_LIMIT - this.mistakeCount}`);
         if (this.mistakeCount >= this.MISTAKE_LIMIT) {
           this.song.stop();
@@ -83,12 +91,14 @@ class TutorialScene extends Phaser.Scene {
   }
 
   update() {
-    // Deal with when user doesn't tap at all when they should
+    // Deal with when user doesn't tap at all when they should or when they tap too late
     const currentTime = this.song.seek;
     for (const timestamp of beats['tutorial']) {
       if (!this.checkedTimestamps[timestamp] && currentTime > timestamp + this.TOLERANCE) {
         this.checkedTimestamps[timestamp] = true;
+        console.log(this.checkedTimestamps)
         this.mistakeCount++;
+        console.log("Adding in update() for " + timestamp)
         this.livesLeftText.setText(`Lives Left: ${this.MISTAKE_LIMIT - this.mistakeCount}`);
         if (this.mistakeCount >= this.MISTAKE_LIMIT) {
           this.song.stop();
