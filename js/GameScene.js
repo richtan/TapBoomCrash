@@ -12,6 +12,7 @@ class GameScene extends Phaser.Scene {
     this.load.image('logo_stick', 'assets/logo/stick_logo.jpg');
     this.load.image('logo_cymbal', 'assets/logo/cymbal_logo2.png');
     this.load.audio('tap_to_start', 'assets/voice/tap the screen to play.m4a');
+    this.load.audio('bgm', 'assets/Main_Menu_Song.mp3');
   }
 
   create() {
@@ -29,6 +30,9 @@ class GameScene extends Phaser.Scene {
     const stick = this.add.sprite(width / 4, height * 5 / 11, 'logo_stick').setScale(width / 2500).setOrigin(0.5);
     const logo_drum = this.add.sprite(width / 2, height * 5 / 11, 'logo_drum').setScale(width / 2500).setOrigin(0.5);
     const cymbal = this.add.sprite(width * 3 / 4, height * 5 / 11, 'logo_cymbal').setScale(width / 2500).setOrigin(0.5);
+
+    this.bgm = this.sound.add('bgm').setVolume(0.5);
+    this.bgm.play();
 
     const made_by_text = this.add.text(16, height - 16, "Made by Richie Tan (game code), Hermes Fu (menu code), Nikhil Prasad (music+voiceovers), and Alex Carroll (music+bass)", {
       fontFamily: "Arial",

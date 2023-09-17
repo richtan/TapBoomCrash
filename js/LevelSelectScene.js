@@ -20,6 +20,7 @@ class LevelSelectScene extends Phaser.Scene {
     this.song_description = this.sound.add('song_description').setVolume(4);
     this.song_description.play();
 
+
     //Arrow
     const right = this.add.image(width - 10, height / 2, 'arrow').setOrigin(1, 0.5).setScale(width / 7000).setInteractive();
     const left = this.add.image(10, height / 2, 'arrow').setOrigin(1, 0.5).setScale(width / 7000).setAngle(180).setInteractive();
