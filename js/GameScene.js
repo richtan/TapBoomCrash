@@ -44,6 +44,7 @@ class GameScene extends Phaser.Scene {
 
     this.input.on('pointerdown', () => {
       this.tap_to_start.stop();
+      this.bgm.stop();
       this.scene.start('LevelSelectScene'); // Go to level select when tapped
     });
   }

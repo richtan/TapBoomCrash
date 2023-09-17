@@ -28,8 +28,8 @@ class TutorialScene extends Phaser.Scene {
     this.TOLERANCE = 0.2;
     this.MISTAKE_LIMIT = 10;
 
-    this.song = this.sound.add('tutorial_song').setVolume(0.5);
-    const bass = this.sound.add('bass_drum_sound').setVolume(4);
+    this.song = this.sound.add('tutorial_song').setVolume(2);
+    const bass = this.sound.add('bass_drum_sound').setVolume(6);
     this.error = this.sound.add('error_sound').setVolume(2);
 
     this.tap_with_me = this.sound.add('tap_with_me').setVolume(4);
