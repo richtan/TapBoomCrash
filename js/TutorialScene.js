@@ -43,8 +43,8 @@ class TutorialScene extends Phaser.Scene {
 
     const gameScene = this.scene.get('GameScene');
 
-    var score = 0;
-    const scoreText = this.add.text(16, 16, `Score: ${score}`, {
+    this.score = 0;
+    const scoreText = this.add.text(16, 16, `Score: ${this.score}`, {
       fontFamily: 'Arial',
       fontSize: '32px',
       fill: '#ffffff',
@@ -93,7 +93,7 @@ class TutorialScene extends Phaser.Scene {
         const timeDelta = Math.abs(currentTime - timestamp);
         if (timeDelta <= this.TOLERANCE) { // must be within 100 ms of the beat
           tappedCorrect = true;
-          score += 10;
+          this.score += 10;
 
           var random_value = Math.floor(Math.random() * 4);
           if(random_value == 0) {
@@ -110,7 +110,7 @@ class TutorialScene extends Phaser.Scene {
           }
 
           this.checkedTimestamps[timestamp] = true;
-          scoreText.setText(`Score: ${score}`);
+          scoreText.setText(`Score: ${this.score}`);
           navigator.vibrate(200);
           break;
         }

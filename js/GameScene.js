@@ -20,6 +20,7 @@ class GameScene extends Phaser.Scene {
 
     this.tap_to_start = this.sound.add('tap_to_start').setVolume(4);
     this.tap_to_start.play();
+    navigator.vibrate(20000);
 
     const tap = this.add.sprite(width / 4, height * 2 / 9, 'logo_tap').setScale(width / 1000).setOrigin(0.5);
     const boom = this.add.sprite(width / 2, height * 2 / 9, 'logo_boom').setScale(width / 1000).setOrigin(0.5);
