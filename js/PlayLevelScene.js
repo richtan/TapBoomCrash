@@ -6,6 +6,8 @@ class PlayLevelScene extends Phaser.Scene {
   init({ level_number }) {
     if (level_number == 1) {
       this.scene.start('TutorialScene');
+    } else {
+      this.scene.start('TutorialScene');
     }
   }
 
