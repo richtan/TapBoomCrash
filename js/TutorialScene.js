@@ -126,11 +126,14 @@ class TutorialScene extends Phaser.Scene {
         this.livesLeftText.setText(`Lives Left: ${this.MISTAKE_LIMIT - this.mistakeCount}`);
         if (this.mistakeCount >= this.MISTAKE_LIMIT) {
           this.song.stop();
-          this.scene.start('GameOverScene');
+          this.scene.start('GameOverScene', {score: this.score, success: false, level_number: 1});
         }
         this.error.play();
       }
     });
+    this.song.on('complete', () => {
+      this.scene.start('GameOverScene', {score: this.score, success: true, level_number: 1});
+    })
   }
 
   update() {
@@ -144,7 +147,7 @@ class TutorialScene extends Phaser.Scene {
         this.livesLeftText.setText(`Lives Left: ${this.MISTAKE_LIMIT - this.mistakeCount}`);
         if (this.mistakeCount >= this.MISTAKE_LIMIT) {
           this.song.stop();
-          this.scene.start('GameOverScene');
+          this.scene.start('GameOverScene', {score: this.score, success: false, level_number: 1});
         }
       }
     }
