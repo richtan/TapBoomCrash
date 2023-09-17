@@ -5,14 +5,10 @@ const config = {
   width: window.innerWidth,
   height: window.innerHeight,
   scale: {
-    mode: Phaser.Scale.FIT,
+    mode: Phaser.Scale.RESIZE,
     autoCenter: Phaser.Scale.CENTER_BOTH,
   },
   scene: [GameScene, LevelSelectScene, TutorialScene, PlayLevelScene],
 };
 
 const game = new Phaser.Game(config);
-
-window.addEventListener('resize', () => {
-  game.scale.resize(window.innerWidth, window.innerHeight);
-});
