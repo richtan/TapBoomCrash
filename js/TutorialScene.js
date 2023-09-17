@@ -16,9 +16,12 @@ class TutorialScene extends Phaser.Scene {
 
     const drum = this.add.sprite(width / 2, height / 2, 'drum').setOrigin(0.5).setScale(1.0).setInteractive();
 
-    const song = this.sound.add('tutorial_song').setVolume(0.5);
+    this.TOLERANCE = 0.1;
+    this.MISTAKE_LIMIT = 4;
+
+    this.song = this.sound.add('tutorial_song').setVolume(0.5);
     const bass = this.sound.add('bass_drum_sound').setVolume(4);
-    const error = this.sound.add('error_sound').setVolume(2);
+    this.error = this.sound.add('error_sound').setVolume(2);
 
     const gameScene = this.scene.get('GameScene');
 
@@ -27,11 +30,18 @@ class TutorialScene extends Phaser.Scene {
       fontFamily: 'Arial',
       fontSize: '32px',
       fill: '#ffffff',
-    })
+    });
 
-    var mistakeCount = 0;
+    this.mistakeCount = 0;
+    this.livesLeftText = this.add.text(width - 16, 16, `Lives Left: ${this.MISTAKE_LIMIT - this.mistakeCount}`, {
+      fontFamily: 'Arial',
+      fontSize: '32px',
+      fill: '#ffffff',
+    }).setOrigin(1, 0);
 
-    song.play();
+    this.checkedTimestamps = {}
+
+    this.song.play();
 
     this.input.on('pointerdown', () => {
       bass.play();
@@ -46,12 +56,13 @@ class TutorialScene extends Phaser.Scene {
         },
       ]).play();
 
-      const currentTime = song.seek;
+      const currentTime = this.song.seek;
 
       var tappedCorrect = false;
-      for (const timestamp of beats['tutorial']) {
+      for (var i = 0; i < beats['tutorial'].length; i++) {
+        const timestamp = beats['tutorial'][i];
         const timeDelta = Math.abs(currentTime - timestamp);
-        if (timeDelta <= 0.1) { // must be within 100 ms of the beat
+        if (timeDelta <= this.TOLERANCE) { // must be within 100 ms of the beat
           tappedCorrect = true;
           score += 10;
           scoreText.setText(`Score: ${score}`);
@@ -59,15 +70,32 @@ class TutorialScene extends Phaser.Scene {
           break;
         }
       }
-      if (!tappedCorrect) {
-        mistakeCount++;
-        // if (mistakeCount >= 3) {
-        //   song.stop();
-        //   this.scene.start('GameOverScene');
-        // }
-        error.play();
+      if (!tappedCorrect) { // Deal with when user taps too early or too late
+        this.mistakeCount++;
+        this.livesLeftText.setText(`Lives Left: ${this.MISTAKE_LIMIT - this.mistakeCount}`);
+        if (this.mistakeCount >= this.MISTAKE_LIMIT) {
+          this.song.stop();
+          this.scene.start('GameOverScene');
+        }
+        this.error.play();
       }
-      // TODO: Check if player didn't tap when they were supposed to
     });
+  }
+
+  update() {
+    // Deal with when user doesn't tap at all when they should
+    const currentTime = this.song.seek;
+    for (const timestamp of beats['tutorial']) {
+      if (!this.checkedTimestamps[timestamp] && currentTime > timestamp + this.TOLERANCE) {
+        this.checkedTimestamps[timestamp] = true;
+        this.mistakeCount++;
+        this.livesLeftText.setText(`Lives Left: ${this.MISTAKE_LIMIT - this.mistakeCount}`);
+        if (this.mistakeCount >= this.MISTAKE_LIMIT) {
+          this.song.stop();
+          this.scene.start('GameOverScene');
+        }
+        // this.error.play();
+      }
+    }
   }
 }

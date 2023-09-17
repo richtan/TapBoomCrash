@@ -8,7 +8,7 @@ const config = {
     mode: Phaser.Scale.RESIZE,
     autoCenter: Phaser.Scale.CENTER_BOTH,
   },
-  scene: [GameScene, LevelSelectScene, TutorialScene, PlayLevelScene],
+  scene: [GameScene, LevelSelectScene, TutorialScene, PlayLevelScene, GameOverScene],
 };
 
 const game = new Phaser.Game(config);
